@@ -37,7 +37,6 @@
   <img src="screenshots/ss3.png" height="300px" />
   <img src="screenshots/ss4.png" height="300px" />
   <img src="screenshots/ss5.png" height="300px" />
-  <img src="screenshots/ss6.png" height="300px" />
 </p>
 ###BUGS
 
