@@ -1,8 +1,8 @@
 
-######~*~*~*~   DOODLE BOY   ~*~*~*~
+###### =======  DOODLE BOY  ======
 <img src="screenshots/ss0.png" height="300px" /> 
 
-####~*~   Features   ~*~
+#### ===   Features   ===
 
 
 ##Doodle Boy
@@ -30,7 +30,7 @@
 
 ##Restart Everything
 
-— Button that repopulates your money and the entire database.
+- Button that repopulates your money and the entire database.
 - Removes all equipped items and removes them from the equip screen.
 
 <p align="center">
@@ -41,9 +41,6 @@
   <img src="screenshots/ss5.png" height="300px" />
   <img src="screenshots/ss6.png" height="300px" />
 </p>
-
-
-
 ####BUGS
 
 - When searching for things, if you flip the orientation, the search closes and the list repopulates automatically.
