@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.korbkenny.doodle_1.Database.ShopSQLHelper;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class EquipActivity extends AppCompatActivity {
 
-    Button mSave;
+    ImageView mSave;
     RecyclerView mRecyclerView;
     EquipAdapter mEquipAdapter;
     List<ShopItem> mShopItemList;
@@ -28,7 +29,7 @@ public class EquipActivity extends AppCompatActivity {
         //SETUP
         //////////
         getIntent();
-        mSave = (Button) findViewById(R.id.ButtonSave);
+        mSave = (ImageView) findViewById(R.id.ButtonSave);
         mShopItemList = ShopSQLHelper.getInstance(this).getBought();
 
         //////////

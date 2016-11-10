@@ -29,13 +29,13 @@
         android:layout_below="@id/equipTitle"
         android:layout_marginBottom="80dp"/>
 
-    <Button
+    <ImageView
         android:id="@+id/ButtonSave"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="Save"/>
+        android:layout_height="wrap_content"
+        android:src="@drawable/button_save"/>
 
 
 </RelativeLayout>

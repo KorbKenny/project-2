@@ -19,8 +19,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public static final String ID_KEY = "id_key";
     private TextView mTitle, mType, mColor, mDescription, mPrice;
-    private ImageView mIcon;
-    private Button mAddToCart;
+    private ImageView mIcon, mAddToCart;
     private ArrayList<ShopItem> mItemsInCart;
     private boolean isInCart;
 
@@ -39,7 +38,7 @@ public class DetailActivity extends AppCompatActivity {
         mDescription = (TextView)findViewById(R.id.detail_description);
         mPrice = (TextView)findViewById(R.id.detail_price);
         mIcon = (ImageView)findViewById(R.id.detail_image);
-        mAddToCart = (Button)findViewById(R.id.detail_button);
+        mAddToCart = (ImageView) findViewById(R.id.detail_button);
 
         int id = getIntent().getIntExtra(ID_KEY,-1);
         if(id == -1){finish();}

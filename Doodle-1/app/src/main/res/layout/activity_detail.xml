@@ -70,11 +70,10 @@
         android:text="Well this is an item tf and is prett, I mean, whatever haiosdfh wjaijfaw hnavi is abuanoduflaoijfisajfsidjfaosijdfaiojsdfioajweifjawioefjaoefjawoeifjaiowejfoaiwjefoawjief"
         android:gravity="center"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/detail_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true">
 
         <TextView
@@ -82,6 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:gravity="center_vertical"
+            android:layout_alignParentLeft="true"
             android:textSize="25sp"
             android:fontFamily="casual"
             android:textStyle="bold"
@@ -91,19 +91,20 @@
         <ImageView
             android:id="@+id/detail_money_icon"
             android:layout_width="wrap_content"
+            android:layout_toRightOf="@id/detail_price"
             android:layout_height="60dp"
             app:srcCompat="@drawable/moneymoneymoney"
             />
-        <Button
+
+        <ImageView
             android:id="@+id/detail_button"
-            android:layout_marginLeft="110dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text="Add to cart"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_addtocart"
             android:fontFamily="casual"/>
 
-</LinearLayout>
+</RelativeLayout>
 
 
 </RelativeLayout>
