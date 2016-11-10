@@ -1,0 +1,10 @@
+b2c030790f03cbe90360d3e5e371f7957f1be733 screenshots
+fb70ed335a302e0ed20ed67c57b52212879d636c done with main stuff
+687876e2640b8b03a5752e5ee5c998a775fac253 Equip feature done
+169e2ce2ef879d89213e2c163947a2c9c530864b RequirementsMet startedEquip feature
+ea474d597e7e0dc025fc55f6024e8e780107d962 Almost all requirements working
+11027b7d4a7908dafe0c153603b62bbce6530eba Search by name color type enabled
+d31a39c45ac3aae38eff7031326b51227fce0ef3 Almost done with detail view
+f3945a30bd200f84e2b6787f5021eaaf91d86f7c shop works with icons and recy db and recyclerview
+0c9e8033f1978a9a454cb7dc048a61eac15f2a49 Set up recyclerview everything
+f452cd4f5c467247b51fc46c791d269e34667d4d Setup Shop Objects and dbHelper

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Doodle Boy</string>
+    <string name="search_hint">Name, Color, Type</string>
+    <string name="current_cash">Current Cash: </string>
+    <string name="total">Total: </string>
+    <string name="cash_remaining">Cash Remaining: </string>
+</resources>

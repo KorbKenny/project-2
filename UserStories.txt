@@ -1,0 +1,97 @@
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~ ~ ~   Features   ~ ~ ~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1 - Quirky little doodle boy doing squats on the main screen.
+2 - A shop where you can search for items and check out their details.
+3 - Ability to add/remove items from a cart.
+4 - Spend your hard earned cash on these items in your cart when you check out.
+5 - Can equip already bought items to your doodle boy.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~ ~ ~  Test Cases  ~ ~ ~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1 - - — - -
+	-The home page shows the doodle boy.
+	-He is in the middle of the screen, nothing obstructing his view.
+	-He will squat up and down, flipping between images every second.
+
+2 - - - - -
+	-From the home page, click a button navigate to the shop page.
+	-The shop page opens and a list of items appears, with their icons, names, and prices.
+	-Will only show items that haven’t been bought yet.
+	-Can scroll through the list.
+	-Can click a search icon in the top right to open a search bar.
+	-Type something into the bar and hit enter. The list will repopulate with items matching any of the letters in the name/color/type that you entered.
+	-Can click on any item at any time to open the detail view of that item.
+	-Detail view shows the icon, the color, the price, the type, and a brief description of the item. 
+	-Can navigate back to shop.
+
+3 - - - - -
+	-From the detail view of an item, there is a button that says “add to cart”
+	-Clicking this button will bring the user back to the shop page, with a toast appearing that says “added to cart”.
+	-If an item has already been added to cart and you try again, it will bring you back to the shop, but say “already in cart” and not add another.
+	-From the shop, there is a button that says “Check out”.
+	-Hitting this button brings up the cart.
+	-Shows a list of everything in your cart, as well as how much money you have, how much money everything costs together, and how much money you will have after purchasing it. There is also a button that says “Check out”.
+	-Long click to remove an item from the list.
+	-The total and remaining cash will update and display.
+	-Can navigate away through all activities and the cart will stay the same.
+
+4 - - - - -
+	-From the cart, there’s a button that says “Check out”.
+	-When clicked, if you don’t have enough money, it will not let you check out. A toast will appear saying you don’t have enough money.
+	-If you DO have enough money, it will let you check out. It will return to the shop with a toast saying “Purchase complete”.
+	-The shop will display with only items that haven’t been bought yet. 
+	-Can make as many transactions as you an afford.
+
+5 - - - - -
+	-Navigate back to the home screen and click the “Equip” button.
+	-There will be a grid of all the icons of the items that have been purchased so far.
+	-When an item is clicked, a toast will say “Equipped”.
+	-Can equip multiple items, but only one for each given type.
+	-If two items of the same type were equipped, the second one will replace the first one.
+	-When the “Save” button is clicked, it will return to the home screen, displaying a newly equipped doodle boy.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~ ~ ~ User Stories ~ ~ ~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1 - - - - -
+	As a user, I can see the doodle boy in the middle of the screen.
+	As a user, I don’t see anything obstructing him.
+
+2 - - - - -
+	As a user, I can navigate to the shop page.
+	As a user, I can scroll through the items in the shop.
+	As a user, I can search for items by name/color/type.
+	As a user, I can check out the details of the item.
+
+3 - - - - -
+	As a user, I can add items to the cart.
+	As a user, I can’t add more than one of the same item to the cart.
+	As a user, I can navigate to the cart.
+	As a user, I can see the list of items in the cart.
+	As a user, I can remove an item in the cart.
+
+4 - - - - -
+	As a user, I can see how much money I have, as well as the total cost of everything in the cart, and the difference.
+	As a user, if I have enough money, I can check out, completing the transaction.
+	As a user, I can see that items I bought now aren’t in the shop list.
+
+5 - - - - -
+	As a user, I can navigate to the equip page.
+	As a user, I can see a grid of all the items I bought.
+	As a user, I can click on an item to equip it.
+	As a user, I can equip as many items as I want, but only one for each type will display.
+	As a user, I can save and go back to the home screen where doodle boy will be updated with the items I equipped him with.
+	
+	
+	
+	
+	
+	
+	

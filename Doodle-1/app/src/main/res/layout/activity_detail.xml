@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.korbkenny.doodle_1.DetailActivity">
+
+    <TextView
+        android:id="@+id/detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:fontFamily="casual"
+        android:text="This is an Item"/>
+
+    <ImageView
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/detail_image"
+        android:layout_width="180dp"
+        android:layout_height="140dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/icon26navi"
+        android:layout_below="@+id/detail_title"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/detail_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type: Elemental"
+        android:fontFamily="casual"
+        android:textStyle="italic"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/detail_image"/>
+
+    <TextView
+        android:id="@+id/detail_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Color: Blue"
+        android:textStyle="italic"
+        android:fontFamily="casual"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/detail_type"/>
+
+    <TextView
+        android:id="@+id/detail_description"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail_color"
+        android:fontFamily="casual"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Well this is an item tf and is prett, I mean, whatever haiosdfh wjaijfaw hnavi is abuanoduflaoijfisajfsidjfaosijdfaiojsdfioajweifjawioefjaoefjawoeifjaiowejfoaiwjefoawjief"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:id="@+id/detail_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/detail_price"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:textSize="25sp"
+            android:fontFamily="casual"
+            android:textStyle="bold"
+            android:layout_marginRight="5dp"
+            android:text="Price: 9"/>
+
+        <ImageView
+            android:id="@+id/detail_money_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/moneymoneymoney"
+            />
+        <Button
+            android:id="@+id/detail_button"
+            android:layout_marginLeft="110dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="Add to cart"
+            android:fontFamily="casual"/>
+
+</LinearLayout>
+
+
+</RelativeLayout>
