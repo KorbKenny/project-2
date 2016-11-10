@@ -1,8 +1,11 @@
 
-###### =======  DOODLE BOY  ======
-<img src="screenshots/ss0.png" height="300px" /> 
+######DOODLE BOY
 
-#### ===   Features   ===
+<p align="center">
+<img src="screenshots/ss0.png" height="300px" /> 
+</p>
+
+####Features
 
 
 ##Doodle Boy
