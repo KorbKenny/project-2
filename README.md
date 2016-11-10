@@ -1,9 +1,7 @@
-
-######DOODLE BOY
-
 <p align="center">
 <img src="screenshots/ss0.png" height="300px" /> 
 </p>
+
 
 ####Features
 
