@@ -1,5 +1,5 @@
 <img src="screenshots/ss0.png" height="300px" /> 
-####Features
+
 ##Doodle Boy
 
 - He’s a doodle, and he’s **constantly** working out his legs with squats.
