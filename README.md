@@ -1,5 +1,5 @@
 <img src="screenshots/ss0.png" height="300px" /> 
-###Features
+#Features
 ##Doodle Boy
 
 - He’s a doodle, and he’s **constantly** working out his legs with squats.
@@ -36,7 +36,7 @@
   <img src="screenshots/ss5.png" height="300px" />
   <img src="screenshots/ss6.png" height="300px" />
 </p>
-####BUGS
+###BUGS
 
 - When searching for things, if you flip the orientation, the search closes and the list repopulates automatically.
 - One time, the shop list went on infinitely with just emo hair over and over again. No idea why. It stopped when I re-installed the app, haven’t seen it since, but still.
