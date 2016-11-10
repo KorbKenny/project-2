@@ -1,12 +1,15 @@
+#DOODLE BOY
+
 <img src="screenshots/ss0.png" height="300px" /> 
+
 #Features
-##Doodle Boy
+##---Doodle Boy
 
 - He’s a doodle, and he’s **constantly** working out his legs with squats.
 - The images of him loop infinitely.
 
 
-##Shop
+##---Shop
 
 - Can scroll through a list of items to buy for doodle boy.
 - Search by name, color, or type of item and filter the results.
@@ -16,14 +19,14 @@
 - Luckily you can remove items from your cart if you want.
 
 
-##Equip
+##---Equip
 
 - Equip those items you bought.
 - Allows for one hair, hat, weapon, shoes, and elemental each.
 - Head back to the main screen and see your customized doodle boy!
 
 
-##Restart Everything
+##---Restart Everything
 
 - Button that repopulates your money and the entire database.
 - Removes all equipped items and removes them from the equip screen.
