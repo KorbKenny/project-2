@@ -36,6 +36,8 @@ public class ShopActivity extends AppCompatActivity {
     String mQuery;
     AsyncTask<Void,Void,Void> mAsyncSetup;
     AsyncTask<Void,Void,Void> mAsyncUpdate;
+    AsyncTask<Void,Void,Void> mAsyncSearchUpdate;
+    List<ShopItem> mSearchList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,12 +154,18 @@ public class ShopActivity extends AppCompatActivity {
     private void handleIntent(Intent intent){
         if(Intent.ACTION_SEARCH.equals(intent.getAction())) {
             mQuery = intent.getStringExtra(SearchManager.QUERY);
-            List<ShopItem> searchList = ShopSQLHelper.getInstance(this).searchQuery(mQuery);
-            if (intent.getAction().equals("")) {
-                mShopAdapter.replaceData(mShopItemList);
-            } else {
-                mShopAdapter.replaceData(searchList);
-            }
+            mAsyncSearchUpdate = new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    mSearchList = ShopSQLHelper.getInstance(ShopActivity.this).searchQuery(mQuery);
+                    return null;
+                }
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    mShopAdapter.replaceData(mSearchList);
+                }
+            };
+            mAsyncSearchUpdate.execute();
         }
     }
 
@@ -170,7 +178,4 @@ public class ShopActivity extends AppCompatActivity {
         mCurrentCash = (TextView)findViewById(R.id.shopMoney);
         mCurrentCash.setText(Integer.toString(SingletonCurrentCash.getInstance().getCash()));
     }
-
-
-
 }
