@@ -1,5 +1,6 @@
 package com.korbkenny.doodle_1;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,8 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView mIcon, mAddToCart;
     private ArrayList<ShopItem> mItemsInCart;
     private boolean isInCart;
+    AsyncTask<Void,Void,Void> mAsyncTask;
+    ShopItem mTheItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,27 +43,36 @@ public class DetailActivity extends AppCompatActivity {
         mIcon = (ImageView)findViewById(R.id.detail_image);
         mAddToCart = (ImageView) findViewById(R.id.detail_button);
 
-        int id = getIntent().getIntExtra(ID_KEY,-1);
+        final int id = getIntent().getIntExtra(ID_KEY,-1);
         if(id == -1){finish();}
 
-        final ShopItem theItem = ShopSQLHelper
-                .getInstance(this)
-                .getItemByID(id);
+        mAsyncTask = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                mTheItem = ShopSQLHelper
+                        .getInstance(DetailActivity.this)
+                        .getItemByID(id);
+                return null;
+            }
 
-        if(theItem == null){finish();}
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                if(mTheItem == null){finish();}
 
-        String pricePlus = "Price: ";
-        String typePlus = "Type: ";
-        String colorPlus = "Color: ";
-        mTitle.setText(theItem.getName());
-        mType.setText(typePlus + theItem.getType());
-        mColor.setText(colorPlus + theItem.getColor());
-        mDescription.setText(theItem.getDescription());
-        mPrice.setText(pricePlus + theItem.getPrice());
+                String pricePlus = "Price: ";
+                String typePlus = "Type: ";
+                String colorPlus = "Color: ";
+                mTitle.setText(mTheItem.getName());
+                mType.setText(typePlus + mTheItem.getType());
+                mColor.setText(colorPlus + mTheItem.getColor());
+                mDescription.setText(mTheItem.getDescription());
+                mPrice.setText(pricePlus + mTheItem.getPrice());
 
-        ArrayList<Integer> icons = SingletonIcons.getInstance().getIcons();
-        mIcon.setImageResource(icons.get(id-1));
-
+                ArrayList<Integer> icons = SingletonIcons.getInstance().getIcons();
+                mIcon.setImageResource(icons.get(id-1));
+            }
+        };
+        mAsyncTask.execute();
 
         ///////////////
         // ADD TO CART
@@ -69,7 +81,7 @@ public class DetailActivity extends AppCompatActivity {
         mItemsInCart = SingletonCart.getInstance().getItemsInCart();
 
         for (ShopItem item:mItemsInCart) {
-            if(item.getID()==theItem.getID()){
+            if(item.getID()==mTheItem.getID()){
                 isInCart = true;
             }
             else {
@@ -80,11 +92,11 @@ public class DetailActivity extends AppCompatActivity {
         mAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isInCart) {
+                if (isInCart) {
                     Toast.makeText(DetailActivity.this, "Already in Cart", Toast.LENGTH_SHORT).show();
                     finish();
-                } else{
-                    SingletonCart.getInstance().addToCart(theItem);
+                } else {
+                    SingletonCart.getInstance().addToCart(mTheItem);
                     Toast.makeText(DetailActivity.this, "Added to Cart", Toast.LENGTH_SHORT).show();
                     finish();
                 }

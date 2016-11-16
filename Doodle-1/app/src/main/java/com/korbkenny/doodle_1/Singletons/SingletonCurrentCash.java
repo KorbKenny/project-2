@@ -16,14 +16,14 @@ public class SingletonCurrentCash {
     }
 
     private SingletonCurrentCash(){
-        mCash = 40;
+        mCash = 50;
     }
 
     public int getCash(){
         return mCash;
     }
 
-    public void restartCash(){mCash = 40;}
+    public void restartCash(){mCash = 50;}
 
     //WILL BE USED FOR BATTLE MODE
     public void earnCash(int earned){

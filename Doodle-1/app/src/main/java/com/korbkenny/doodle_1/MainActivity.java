@@ -2,6 +2,7 @@ package com.korbkenny.doodle_1;
 
 import android.content.Intent;
 import android.media.Image;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.korbkenny.doodle_1.Database.DBAssetHelper;
 import com.korbkenny.doodle_1.Database.ShopSQLHelper;
 import com.korbkenny.doodle_1.Singletons.SingletonCart;
 import com.korbkenny.doodle_1.Singletons.SingletonCurrentCash;
@@ -27,11 +29,23 @@ public class MainActivity extends AppCompatActivity {
     ImageView mButton, mEquip, mDoodleName;
     List<Integer> dHair, dHat, dElemental, dWeapon, dShoes;
     List<Integer> doodle = new ArrayList<>();
+    AsyncTask<Void,Void,Void> mAsyncReset;
+    AsyncTask<Void,Void,Void> mAsyncLoadData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAsyncLoadData = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                DBAssetHelper dbSetup = new DBAssetHelper(MainActivity.this);
+                dbSetup.getReadableDatabase();
+                return null;
+            }
+        };
+        mAsyncLoadData.execute();
 
         ///////////////
         // VIEWS SETUP
@@ -42,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         dPicElemental = (ImageView) findViewById(R.id.dpicElemental);
         dPicHat = (ImageView) findViewById(R.id.dpicHat);
         dPicShoes = (ImageView) findViewById(R.id.dpicShoes);
+
+        mDoodlePic.setImageResource(R.drawable.up_doodle);
 
         mDoodleName = (ImageView) findViewById(R.id.Title);
         mRefresh = (Button) findViewById(R.id.ButtonRefresh);
@@ -101,8 +117,13 @@ public class MainActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ShopActivity.class);
-                startActivity(intent);
+                if(mAsyncReset != null && mAsyncReset.getStatus() == AsyncTask.Status.RUNNING &&
+                        mAsyncLoadData != null && mAsyncLoadData.getStatus() == AsyncTask.Status.RUNNING) {
+                    Toast.makeText(MainActivity.this, "Hold up, database still populating...", Toast.LENGTH_SHORT).show();
+                } else{
+                    Intent intent = new Intent(MainActivity.this, ShopActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -112,8 +133,13 @@ public class MainActivity extends AppCompatActivity {
         mEquip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, EquipActivity.class);
-                startActivity(intent);
+                if(mAsyncReset != null && mAsyncReset.getStatus() == AsyncTask.Status.RUNNING &&
+                mAsyncLoadData != null && mAsyncLoadData.getStatus() == AsyncTask.Status.RUNNING) {
+                    Toast.makeText(MainActivity.this, "Hold up, database still populating...", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(MainActivity.this, EquipActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -124,22 +150,39 @@ public class MainActivity extends AppCompatActivity {
         mRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SingletonCart.getInstance().removeAllFromCart();
-                List<ShopItem> allItems = ShopSQLHelper.getInstance(MainActivity.this).getAllAsList();
-                ShopSQLHelper.getInstance(MainActivity.this).nothingBought(allItems);
-                dHat.clear();
-                dHair.clear();
-                dWeapon.clear();
-                dShoes.clear();
-                dElemental.clear();
-                dPicHat.setImageResource(0);
-                dPicHair.setImageResource(0);
-                dPicWeapon.setImageResource(0);
-                dPicShoes.setImageResource(0);
-                dPicElemental.setImageResource(0);
-                SingletonCurrentCash.getInstance().restartCash();
-                Toast.makeText(MainActivity.this, "Started Over", Toast.LENGTH_SHORT).show();
+                if(mAsyncLoadData != null && mAsyncLoadData.getStatus() == AsyncTask.Status.RUNNING) {
+                    Toast.makeText(MainActivity.this, "Hold up", Toast.LENGTH_SHORT).show();
+                }else{
+                    SingletonCart.getInstance().removeAllFromCart();
+                    dHat.clear();
+                    dHair.clear();
+                    dWeapon.clear();
+                    dShoes.clear();
+                    dElemental.clear();
+                    dPicHat.setImageResource(0);
+                    dPicHair.setImageResource(0);
+                    dPicWeapon.setImageResource(0);
+                    dPicShoes.setImageResource(0);
+                    dPicElemental.setImageResource(0);
+                    SingletonCurrentCash.getInstance().restartCash();
 
+                    mAsyncReset = new AsyncTask<Void, Void, Void>() {
+                        @Override
+                        protected Void doInBackground(Void... voids) {
+                            List<ShopItem> allItems = ShopSQLHelper.getInstance(MainActivity.this).getAllAsList();
+                            ShopSQLHelper.getInstance(MainActivity.this).nothingBought(allItems);
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Void aVoid) {
+                            Toast.makeText(MainActivity.this, "Started Over", Toast.LENGTH_SHORT).show();
+                        }
+                    };
+
+                    mAsyncReset.execute();
+
+                }
             }
         });
     }

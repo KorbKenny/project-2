@@ -27,7 +27,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopViewHolder> {
         mIcons = SingletonIcons.getInstance().getIcons();
     }
 
-
     @Override
     public ShopViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());

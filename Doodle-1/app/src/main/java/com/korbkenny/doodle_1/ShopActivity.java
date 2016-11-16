@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.korbkenny.doodle_1.Database.DBAssetHelper;
 import com.korbkenny.doodle_1.Database.ShopSQLHelper;
@@ -32,26 +34,42 @@ public class ShopActivity extends AppCompatActivity {
     ShopAdapter mShopAdapter;
     List<ShopItem> mShopItemList;
     String mQuery;
+    AsyncTask<Void,Void,Void> mAsyncSetup;
+    AsyncTask<Void,Void,Void> mAsyncUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
 
-        //////////////////
-        // DATABASE SETUP
-        //////////////////
-        DBAssetHelper dbSetup = new DBAssetHelper(ShopActivity.this);
-        dbSetup.getReadableDatabase();
-
-
         ///////////////
         //   SETUP
         ///////////////
-        mShopItemList = ShopSQLHelper.getInstance(this).getAllAsList();
-        mCurrentCash = (TextView)findViewById(R.id.shopMoney);
+        mCurrentCash = (TextView) findViewById(R.id.shopMoney);
         mCurrentCash.setText(Integer.toString(SingletonCurrentCash.getInstance().getCash()));
-        mCartButton = (ImageView)findViewById(R.id.checkoutbutton);
+        mCartButton = (ImageView) findViewById(R.id.checkoutbutton);
+
+
+        /////////////////
+        // RECYCLER VIEW
+        /////////////////
+        mAsyncSetup = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                mShopItemList = ShopSQLHelper.getInstance(ShopActivity.this).getAllAsList();
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+                mShopAdapter = new ShopAdapter(mShopItemList);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ShopActivity.this, LinearLayoutManager.VERTICAL, false);
+                mRecyclerView.setLayoutManager(linearLayoutManager);
+                mRecyclerView.setAdapter(mShopAdapter);
+            }
+        };
+        mAsyncSetup.execute();
 
 
         //////////////////
@@ -60,22 +78,16 @@ public class ShopActivity extends AppCompatActivity {
         mCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ShopActivity.this,CartActivity.class);
-                startActivityForResult(intent,REQUEST_CODE);
+                if (mAsyncSetup != null && mAsyncSetup.getStatus()== AsyncTask.Status.RUNNING){
+                    Toast.makeText(ShopActivity.this, "Hold up.", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(ShopActivity.this, CartActivity.class);
+                    startActivityForResult(intent, REQUEST_CODE);
+                }
             }
         });
 
-
-        /////////////////
-        // RECYCLER VIEW
-        /////////////////
-        mShopAdapter = new ShopAdapter(mShopItemList);
-        mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setAdapter(mShopAdapter);
     }
-
 
     //////////////////////////////////////////////
     // REMOVES ITEMS FROM LIST WHEN THEY'RE BOUGHT
@@ -86,8 +98,18 @@ public class ShopActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 String resultData = data.getStringExtra("key");
                 if (resultData.equals("key")) {
-                    mShopItemList = ShopSQLHelper.getInstance(ShopActivity.this).getAllAsList();
-                    mShopAdapter.replaceData(mShopItemList);
+                    mAsyncUpdate = new AsyncTask<Void, Void, Void>() {
+                        @Override
+                        protected Void doInBackground(Void... voids) {
+                            mShopItemList = ShopSQLHelper.getInstance(ShopActivity.this).getAllAsList();
+                            return null;
+                        }
+                        @Override
+                        protected void onPostExecute(Void aVoid) {
+                            mShopAdapter.replaceData(mShopItemList);
+                        }
+                    };
+                    mAsyncUpdate.execute();
                 }
             }
         }
